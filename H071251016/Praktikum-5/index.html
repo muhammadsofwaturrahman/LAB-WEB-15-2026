@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Tim - Monitoring Tugas</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8">
+
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Aplikasi -->
+    <header class="mb-8 border-b border-slate-700 pb-4">
+      <h1 class="text-3xl font-bold text-indigo-400">Dashboard Monitoring Tim</h1>
+      <p class="text-slate-400 mt-1">Pantau progres dan kelola tugas anggota tim secara real-time.</p>
+    </header>
+
+    <!-- Layout Utama: Grid 2 Kolom -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Kolom Kiri: Daftar Anggota Tim (F1) -->
+      <section class="bg-slate-800 p-6 rounded-xl border border-slate-700 h-fit">
+        <h2 class="text-xl font-semibold text-white mb-4">Anggota Tim</h2>
+        
+        <!-- Status Loading / Error Anggota -->
+        <p id="statusAnggota" class="text-slate-400 text-sm mb-4">Memuat anggota...</p>
+        
+        <!-- Wadah List Anggota Tim -->
+        <div id="daftarAnggota" class="flex flex-col gap-2"></div>
+      </section>
+
+      <!-- Kolom Kanan: Detail & Tugas Anggota (F2, F3, F4, F5) -->
+      <section class="lg:col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col gap-6">
+        
+        <!-- Header Bagian Tugas -->
+        <div class="border-b border-slate-700 pb-4">
+          <h2 id="judulTugas" class="text-2xl font-bold text-white">Pilih Anggota Tim</h2>
+          <p id="progresTugas" class="text-slate-400 text-sm mt-1">Pilih salah satu anggota tim di sebelah kiri untuk melihat tugas.</p>
+        </div>
+
+        <!-- Form Tambah Tugas Baru (F4) -->
+        <form id="formTugas" class="bg-slate-900 p-4 rounded-lg border border-slate-700 flex flex-col gap-3">
+          <h3 class="text-sm font-semibold text-slate-300">Tambah Tugas Baru</h3>
+          <div class="flex gap-2">
+            <input 
+              type="text" 
+              id="inputJudul" 
+              placeholder="Masukkan judul tugas baru..." 
+              class="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+            />
+            <button 
+              type="submit" 
+              id="btnSimpan" 
+              class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-5 py-2 rounded-lg text-sm transition-colors"
+            >
+              Simpan
+            </button>
+          </div>
+          <!-- Pesan Error Validasi / Promise -->
+          <p id="pesanErrorForm" class="text-rose-400 text-xs hidden"></p>
+          <!-- Notifikasi Sukses 3 Detik -->
+          <p id="notifikasiSukses" class="text-emerald-400 text-xs hidden"></p>
+        </form>
+
+        <!-- Kotak Pencarian Tugas (F3) -->
+        <div>
+          <input 
+            type="text" 
+            id="inputCari" 
+            placeholder="Cari tugas berdasarkan judul..." 
+            class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-indigo-500"
+          />
+        </div>
+
+        <!-- Status Loading / Error / Empty Pencarian -->
+        <p id="statusTugas" class="text-slate-400 text-sm hidden"></p>
+        <p id="pesanKosongCari" class="text-amber-400 text-sm hidden">Tidak ada tugas yang cocok.</p>
+
+        <!-- Daftar Tugas -->
+        <ul id="daftarTugas" class="flex flex-col gap-2"></ul>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Memanggil berkas JavaScript Eksternal di bagian bawah body -->
+  <script src="script.js"></script>
+</body>
+</html>
